@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 19, 2024 12:15:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Util.Avaliacao" table="avaliacao" catalog="engsoftware" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="descricao" type="string">
+            <column name="descricao" />
+        </property>
+        <property name="peso" type="big_decimal">
+            <column name="peso" precision="5" />
+        </property>
+        <set name="disciplinas" table="avaliacao_disciplina" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_avaliacao" not-null="true" />
+            </key>
+            <many-to-many entity-name="Util.Disciplina">
+                <column name="id_disciplina" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="realizas" table="realiza" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_avaliacao" not-null="true" />
+            </key>
+            <one-to-many class="Util.Realiza" />
+        </set>
+    </class>
+</hibernate-mapping>

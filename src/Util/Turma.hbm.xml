@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 19, 2024 12:15:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Util.Turma" table="turma" catalog="engsoftware" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="descricao" type="string">
+            <column name="descricao" />
+        </property>
+        <set name="estudantes" table="estudante" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_turma" />
+            </key>
+            <one-to-many class="Util.Estudante" />
+        </set>
+    </class>
+</hibernate-mapping>
